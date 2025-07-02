@@ -7,7 +7,6 @@ import humidity_icon from "../images/humidity_icon.png";
 import snow_icon from "../images/snow_icon.png";
 import wind_icon from "../images/wind-icon.webp";
 import rain_icon from "../images/rainy_icon.png";
-import theme from "../images/theme.png";
 import './Weather.css';
 
 const Weather = () => {
@@ -21,15 +20,11 @@ const Weather = () => {
     wind: ""
   });
   const [wicon, setWicon] = useState(cloud_icon);
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("dark-theme");
-  };
 
   const search = async () => {
-    if (city.trim() === "") return;
+    if (city.trim() === "") {
+      return;
+    }
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
     const response = await fetch(url);
@@ -57,11 +52,7 @@ const Weather = () => {
   };
 
   return (
-    <>
-      <div className="theme-toggle">
-        <img src={theme} alt="Toggle Theme" onClick={toggleTheme} />
-      </div>
-
+    // <div className='bg'>
       <div className='container'>
         <div className="top-bar">
           <input
@@ -96,12 +87,14 @@ const Weather = () => {
             <img src={wind_icon} height="50px" alt="wind speed" />
             <div className="data">
               <div className="wind-rate">{weatherData.wind ? `${weatherData.wind} km/h` : "18 km/h"}</div>
-              <div className="text">Wind Speed</div>
+              <div className="text">Wind speed</div>
             </div>
           </div>
         </div>
       </div>
-    </>
+
+  
+
   );
 };
 
